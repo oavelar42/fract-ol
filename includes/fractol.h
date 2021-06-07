@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 15:09:56 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/07 18:38:26 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 960
+# define THREADS 8
 
 # include "mlx.h"
 # include <stdint.h>
@@ -30,6 +31,10 @@
 # if defined(__linux__) || defined(__unix__)
 #  define ESC 65307
 #  define CLOSE 33
+#  define UP 65362
+#  define DOWN 65364
+#  define LEFT 65361
+#  define RIGHT 65363
 
 # elif __APPLE__
 #  define ESC 53
@@ -46,17 +51,66 @@ typedef struct  s_image
     int     endian;
 }               t_image;
 
+typedef struct		s_complex
+{
+	double		r;
+	double		i;
+}					t_complex;
+
+typedef struct		s_viewport
+{
+	double		xmin;
+	double		xmax;
+	double		ymin;
+	double		ymax;
+	double		zoom;
+	double		offx;
+	double		offy;
+	long		max;
+	t_complex	mouse;
+}					t_viewport;
+
+typedef struct		s_pixel
+{
+	t_complex	c;
+	long		i;
+}					t_pixel;
+
+typedef struct s_mlx	t_mlx;
+
+typedef void		(*t_f_fn_v)(t_viewport *v);
+typedef t_pixel		(*t_f_fn_p)(int x, int y, t_viewport *v, t_mlx *mlx);
+
 typedef struct  s_fractal
 {
     char    *name;
+    t_f_fn_v	viewport;
+	t_f_fn_p	pixel;
 }               t_fractal;
+
+typedef struct		s_thread
+{
+	int				id;
+	t_mlx			*mlx;
+}					t_thread;
+
+typedef struct		s_render
+{
+	pthread_t		threads[THREADS];
+	t_thread		args[THREADS];
+}					t_render;
 
 typedef struct s_mlx
 {
     void        *mlx;
     void        *window;
     t_fractal   *fractal;
+    t_pixel     *data;
+    t_viewport  viewport;
     t_image     *image;
+    t_render    render;
 }               t_mlx;
 
 #endif
+
+void        init(t_mlx *mlx);

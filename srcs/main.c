@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 16:48:31 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/07 17:19:33 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	key_hook(int keycode, t_mlx *mlx)
 		printf("\n\nClosed with ESC\n");
 		close_program(mlx);
 	}
-	if (1)
-		push_image(mlx);
+	if (keycode == RIGHT || keycode == LEFT || keycode == UP || keycode == DOWN)
+		move_element(keycode, mlx);
 	return (0);
 }
 
