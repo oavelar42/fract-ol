@@ -6,14 +6,19 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/04 14:26:37 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/07 15:09:56 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 960
+
 # include "mlx.h"
+# include <stdint.h>
+# include <pthread.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -35,6 +40,10 @@
 typedef struct  s_image
 {
     void    *image;
+    char    *ptr;
+    int     bpp;
+    int     stride;
+    int     endian;
 }               t_image;
 
 typedef struct  s_fractal
@@ -44,9 +53,10 @@ typedef struct  s_fractal
 
 typedef struct s_mlx
 {
-    void    *mlx;
-    void    *window;
-    t_image *image;
+    void        *mlx;
+    void        *window;
+    t_fractal   *fractal;
+    t_image     *image;
 }               t_mlx;
 
 #endif
