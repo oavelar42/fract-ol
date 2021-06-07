@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 17:19:33 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/07 23:10:34 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 	if (f->name == NULL)
 		printf("\nInvalid fractal name\n");
 	init(mlx);
-	reset_vierport(mlx);
-	close_program(&mlx);
+	reset_viewport(mlx);
+	close_program(mlx);
 	return (0);
 }

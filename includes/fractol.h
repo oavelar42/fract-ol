@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 18:38:26 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/07 23:12:05 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <math.h>
 # include <float.h>
 # include <fcntl.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 # if defined(__linux__) || defined(__unix__)
 #  define ESC 65307
@@ -39,6 +39,11 @@
 # elif __APPLE__
 #  define ESC 53
 #  define CLOSE 17
+#  define UP 126
+#  define DOWN 125
+#  define LEFT 123
+#  define RIGHT 124
+
 
 #endif
 
@@ -114,3 +119,11 @@ typedef struct s_mlx
 #endif
 
 void        init(t_mlx *mlx);
+void        render(t_mlx *mlx);
+void	    draw(t_mlx *mlx);
+t_image     *del_image(t_mlx *mlx, t_image *img);
+void        image_set_pixel(t_image *image, int x, int y, int color);
+t_fractal	*fractal_match(char *str);
+int			get_color(t_pixel p, t_mlx *mlx);
+void		viewport_fit(t_viewport *v);
+void		reset_viewport(t_mlx *mlx);

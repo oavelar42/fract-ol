@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:51:56 by oavelar           #+#    #+#              #
-#    Updated: 2021/05/27 15:07:18 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/07 22:55:34 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,13 @@ LIBFT_A		= libft/libft.a
 
 SRC_DIR		= srcs/
 
-SRC_FILES	= 	srcs ...
+SRC_FILES	= 	main.c \
+				image.c \
+				render.c \
+				move.c \
+				view.c \
+				fractal_name.c
 		
-
 SRC		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 GREEN		= \033[1;32m
