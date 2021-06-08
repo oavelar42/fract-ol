@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:51:56 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/07 22:55:34 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/08 21:27:16 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,11 @@ SRC_FILES	= 	main.c \
 				render.c \
 				move.c \
 				view.c \
-				fractal_name.c
+				color.c \
+				fractal_name.c \
+				fractal_burn.c \
+				fractal_julia.c \
+				fractal_mandel.c
 		
 SRC		= $(addprefix $(SRC_DIR), $(SRC_FILES))
 

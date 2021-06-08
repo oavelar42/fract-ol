@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/08 12:56:27 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/08 20:00:14 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 960
+# define ZOOM 1.1f
 # define THREADS 8
 
 # include "mlx.h"
@@ -85,13 +86,13 @@ typedef struct s_mlx	t_mlx;
 
 typedef void		(*t_f_fn_v)(t_viewport *v);
 typedef t_pixel		(*t_f_fn_p)(int x, int y, t_viewport *v, t_mlx *mlx);
-
-typedef struct  s_fractal
+typedef struct		s_fractal
 {
-    char    *name;
-    t_f_fn_v	viewport;
+	char		*name;
+	t_f_fn_v	viewport;
 	t_f_fn_p	pixel;
-}               t_fractal;
+	int			mouse;
+}					t_fractal;
 
 typedef struct		s_thread
 {
@@ -117,8 +118,6 @@ typedef struct s_mlx
     t_render    render;
 }               t_mlx;
 
-#endif
-
 void        init(t_mlx *mlx);
 void        render(t_mlx *mlx);
 void	    draw(t_mlx *mlx);
@@ -134,3 +133,7 @@ t_pixel     julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
 void		julia_viewport(t_viewport *v);
 t_pixel 	mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
 void    	mandelbrot_viewport(t_viewport *v);
+t_pixel		burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void		burningship_viewport(t_viewport *v);
+
+#endif
