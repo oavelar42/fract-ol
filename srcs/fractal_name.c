@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 22:31:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 23:04:43 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:31:57 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*t_fractal   *get_fractal(void)
+t_fractal   *get_fractal(void)
 {
     static t_fractal array[8] = {
         {"mandelbrot", mandelbrot_viewport, mandelbrot_pixel, 0},
@@ -21,7 +21,7 @@
 		{NULL, NULL, NULL, 0}
     };
     return (array);
-}*/
+}
 
 t_fractal   *fractal_match(char *str)
 {

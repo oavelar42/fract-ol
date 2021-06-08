@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 23:10:34 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/08 10:31:35 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,22 @@ void	push_image(t_mlx *mlx)
 
 void	init(t_mlx *mlx)
 {
-	t_image	*image;
+	t_image	image;
 
 	mlx->mlx = mlx_init();
 	mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
 	mlx->image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	image->ptr = mlx_get_data_addr(image->image, &image->bpp, &image->stride, &image->endian);
+	mlx->img_add = mlx_get_data_addr(mlx->image, &image.bpp, &image.stride, &image.endian);
 	mlx_hook(mlx->window, CLOSE, 0L, close_program, mlx);
 	mlx_key_hook(mlx->window, key_hook, mlx);
-	mlx_expose_hook(mlx->window, push_image, mlx);
+	//mlx_expose_hook(mlx->window, push_image, mlx);
 	push_image(mlx);
 	mlx_loop(mlx->mlx);
 }
 
 int	main(int ac, char **av)
 {
-	t_mlx		*mlx;
+	t_mlx		mlx;
 	t_fractal	*f;
 
 	if (ac < 2)
@@ -64,8 +64,8 @@ int	main(int ac, char **av)
 	f = fractal_match(av[1]);
 	if (f->name == NULL)
 		printf("\nInvalid fractal name\n");
-	init(mlx);
-	reset_viewport(mlx);
-	close_program(mlx);
+	init(&mlx);
+	reset_viewport(&mlx);
+	close_program(&mlx);
 	return (0);
 }
