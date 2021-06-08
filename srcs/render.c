@@ -6,17 +6,17 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 14:33:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/07 18:46:24 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/08 11:04:35 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void     *render_thread(void *m)
+void	*render_thread(void *m)
 {
-	t_thread    *t;
-	int         x;
-	int         y;
+	t_thread	*t;
+	int			x;
+	int			y;
 
 	t = (t_thread *)m;
 	y = WIN_HEIGHT / THREADS * t->id;
@@ -34,10 +34,10 @@ void     *render_thread(void *m)
 	return (NULL);
 }
 
-void    render(t_mlx *mlx)
+void	render(t_mlx *mlx)
 {
-   int         count;
-   t_render    *ren;
+   int			count;
+   t_render		*ren;
 
    count = 0;
    ren = &mlx->render;

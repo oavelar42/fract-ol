@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/08 10:29:18 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/08 12:56:27 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,8 @@ int			get_color(t_pixel p, t_mlx *mlx);
 void		viewport_fit(t_viewport *v);
 void		reset_viewport(t_mlx *mlx);
 void    	move_element(int key, t_mlx *mlx);
+t_complex	screen_complex(int x, int y, t_viewport *v);
+t_pixel     julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void		julia_viewport(t_viewport *v);
+t_pixel 	mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void    	mandelbrot_viewport(t_viewport *v);
