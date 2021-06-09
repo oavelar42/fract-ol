@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/08 11:03:46 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/09 16:13:05 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ int	key_hook(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-void	push_image(t_mlx *mlx)
+int	push_image(t_mlx *mlx)
 {
 	render(mlx);
-	mlx_clear_window(mlx->mlx, mlx->window);
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image, 0, 0);
+	return (0);
 }
 
 void	init(t_mlx *mlx)
@@ -49,7 +48,7 @@ void	init(t_mlx *mlx)
 	mlx->img_add = mlx_get_data_addr(mlx->image, &image.bpp, &image.stride, &image.endian);
 	mlx_hook(mlx->window, CLOSE, 0L, close_program, mlx);
 	mlx_key_hook(mlx->window, key_hook, mlx);
-	//mlx_expose_hook(mlx->window, push_image, mlx);
+	mlx_expose_hook(mlx->window, push_image, mlx);
 	push_image(mlx);
 	mlx_loop(mlx->mlx);
 }
@@ -59,12 +58,12 @@ int	main(int ac, char **av)
 	t_mlx		mlx;
 	t_fractal	*f;
 
+	init(&mlx);
 	if (ac < 2)
-		printf("\nERROR : not enough arguments\n");
+		return(printf("\nERROR : not enough arguments\n"));
 	f = fractal_match(av[1]);
 	if (f->name == NULL)
-		printf("\nInvalid fractal name\n");
-	init(&mlx);
+		return(printf("\nInvalid fractal name\n"));
 	reset_viewport(&mlx);
 	close_program(&mlx);
 	return (0);

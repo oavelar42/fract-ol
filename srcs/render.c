@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 14:33:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/08 11:04:35 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/09 15:12:08 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	*render_thread(void *m)
+void		*render_thread(void *m)
 {
 	t_thread	*t;
 	int			x;
@@ -34,33 +34,33 @@ void	*render_thread(void *m)
 	return (NULL);
 }
 
-void	render(t_mlx *mlx)
+void		render(t_mlx *mlx)
 {
-   int			count;
-   t_render		*ren;
+	int			i;
+	t_render	*r;
 
-   count = 0;
-   ren = &mlx->render;
-   while (count < THREADS)
-   {
-	  ren->args[count].id = count;
-	  ren->args[count].mlx = mlx;
-	  pthread_create(ren->threads + count, NULL, render_thread, &(ren->args[count]));
-	  count++;
-   }
-   count = 0;
-   while (count < THREADS)
-   {
-	  pthread_join(ren->threads[count], NULL);
-	  count++;
-   }
-   draw(mlx);
+	i = 0;
+	r = &mlx->render;
+	while (i < THREADS)
+	{
+		r->args[i].id = i;
+		r->args[i].mlx = mlx;
+		pthread_create(r->threads + i, NULL, render_thread, &(r->args[i]));
+		i++;
+	}
+	i = 0;
+	while (i < THREADS)
+	{
+		pthread_join(r->threads[i], NULL);
+		i++;
+	}
+	draw(mlx);
 }
 
-void	draw(t_mlx *mlx)
+void		draw(t_mlx *mlx)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -69,7 +69,7 @@ void	draw(t_mlx *mlx)
 		while (x < WIN_WIDTH)
 		{
 			image_set_pixel(mlx->image, x, y,
-				get_color(*(mlx->data + y * WIN_WIDTH + x), mlx));
+					get_color(*(mlx->data + y * WIN_WIDTH + x), mlx));
 			x++;
 		}
 		y++;

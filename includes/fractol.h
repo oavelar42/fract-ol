@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/08 20:00:14 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/09 17:07:07 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <math.h>
 # include <float.h>
 # include <fcntl.h>
+# include <pthread.h>
 # include "../libft/libft.h"
 
 # if defined(__linux__) || defined(__unix__)
@@ -45,13 +46,26 @@
 #  define LEFT 123
 #  define RIGHT 124
 
-
 #endif
+
+typedef struct		s_rgba
+{
+	uint8_t		b;
+	uint8_t		g;
+	uint8_t		r;
+	uint8_t		a;
+}					t_rgba;
+
+typedef union		u_color
+{
+	int			value;
+	t_rgba		rgba;
+}					t_color;
 
 typedef struct  s_image
 {
     void    *image;
-    char    *ptr;
+	char	*ptr;
     int     bpp;
     int     stride;
     int     endian;
@@ -82,6 +96,13 @@ typedef struct		s_pixel
 	long		i;
 }					t_pixel;
 
+typedef struct		s_palette
+{
+	uint8_t		count;
+	int			cycle;
+	int			colors[16];
+}					t_palette;
+
 typedef struct s_mlx	t_mlx;
 
 typedef void		(*t_f_fn_v)(t_viewport *v);
@@ -111,15 +132,18 @@ typedef struct s_mlx
     void        *mlx;
     void        *window;
 	char    	*img_add;
-    t_fractal   *fractal;
+    char		*ptr;
+	t_fractal   *fractal;
     t_pixel     *data;
     t_viewport  viewport;
     t_image     *image;
-    t_render    render;
+	t_render    render;
+	t_palette	*palette;
+	int			smooth;
 }               t_mlx;
 
 void        init(t_mlx *mlx);
-void        render(t_mlx *mlx);
+void 	    render(t_mlx *mlx);
 void	    draw(t_mlx *mlx);
 t_image     *del_image(t_mlx *mlx, t_image *img);
 void        image_set_pixel(t_image *image, int x, int y, int color);

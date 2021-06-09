@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/23 19:51:56 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/08 21:27:16 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/09 10:45:28 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME		:= fractol
 
 OS		:= $(shell uname)
 
-CC		= gcc 
+CC		= gcc -g
 
-CFLAGS		= -Wall -Wextra -Werror -Imlx
+CFLAGS		= -Wall -Wextra -Werror
 
 INCLUDES	= -Iincludes/ -I$(MINILIBX_DIR)
 
@@ -60,8 +60,8 @@ all: libraries $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(BLUE)Building Fract-ol$(COLOR_OFF)"
-	$(CC) $(CFLAGS) $(SRC) $(INCLUDES) $(LIBFT_A) $(MINILIBX_A) $(MLXFLAG) -o $(NAME)
-	@echo "$(GREEN)miniRT done!$(COLOR_OFF)"
+	$(CC) $(CFLAGS) $(SRC) $(INCLUDES) $(LIBFT_A) -l pthread $(MINILIBX_A) $(MLXFLAG) -o $(NAME)
+	@echo "$(GREEN)Fract-ol done!$(COLOR_OFF)"
 
 libraries:
 	@echo "$(BLUE)Building libraries....$(COLOR_OFF)"
