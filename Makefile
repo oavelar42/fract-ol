@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/02/23 19:51:56 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/09 10:45:28 by oavelar          ###   ########.fr        #
+#    Created: 2021/05/23 19:51:56 by oavelar           #+#    #+#              #
+#    Updated: 2021/06/10 18:31:02 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,10 @@ SRC_FILES	= 	main.c \
 				image.c \
 				render.c \
 				move.c \
+				move_2.c \
 				view.c \
 				color.c \
+				palette.c \
 				fractal_name.c \
 				fractal_burn.c \
 				fractal_julia.c \

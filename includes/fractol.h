@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/09 17:07:07 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/10 17:57:25 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@
 #  define DOWN 65364
 #  define LEFT 65361
 #  define RIGHT 65363
+#  define NUM_0	65456
+#  define DIGIT_1 49
+#  define NUM_MULT 65450
+#  define NUM_DIV 65455
+#  define NUM_PLUS 65451
+#  define NUM_MINUS 65453
+#  define NUM_ENTER 65421
+#  define L 108
 
 # elif __APPLE__
 #  define ESC 53
@@ -45,6 +53,14 @@
 #  define DOWN 125
 #  define LEFT 123
 #  define RIGHT 124
+#  define NUM_0	82
+#  define DIGIT_1 18
+#  define NUM_MULT 67
+#  define NUM_DIV 75
+#  define NUM_PLUS 69
+#  define NUM_MINUS 78
+#  define NUM_ENTER 76
+#  define L 37
 
 #endif
 
@@ -62,14 +78,23 @@ typedef union		u_color
 	t_rgba		rgba;
 }					t_color;
 
-typedef struct  s_image
+typedef struct		s_mouse
 {
-    void    *image;
-	char	*ptr;
-    int     bpp;
-    int     stride;
-    int     endian;
-}               t_image;
+	char		isdown;
+	int			x;
+	int			y;
+	int			lastx;
+	int			lasty;
+}					t_mouse;
+
+/*typedef struct		s_image
+{
+	void		*image;
+	char		*ptr;
+	int			bpp;
+	int			stride;
+	int			endian;
+}					t_image;*/
 
 typedef struct		s_complex
 {
@@ -102,7 +127,6 @@ typedef struct		s_palette
 	int			cycle;
 	int			colors[16];
 }					t_palette;
-
 typedef struct s_mlx	t_mlx;
 
 typedef void		(*t_f_fn_v)(t_viewport *v);
@@ -132,26 +156,39 @@ typedef struct s_mlx
     void        *mlx;
     void        *window;
 	char    	*img_add;
-    char		*ptr;
 	t_fractal   *fractal;
     t_pixel     *data;
     t_viewport  viewport;
-    t_image     *image;
+	t_mouse		mouse;
+    //t_image     *image;
 	t_render    render;
 	t_palette	*palette;
 	int			smooth;
+	int			mouselock;
+	void    *image;
+	char	*ptr;
+    int     bpp;
+    int     stride;
+    int     endian;
 }               t_mlx;
 
 void        init(t_mlx *mlx);
 void 	    render(t_mlx *mlx);
 void	    draw(t_mlx *mlx);
-t_image     *del_image(t_mlx *mlx, t_image *img);
-void        image_set_pixel(t_image *image, int x, int y, int color);
+t_mlx     *del_image(t_mlx *mlx);
+void    	mouse(t_mlx *mlx);
+int			hook_keydown(int key, t_mlx *mlx);
+int			hook_mousedown(int button, int x, int y, t_mlx *mlx);
+int			hook_mouseup(int button, int x, int y, t_mlx *mlx);
+int			hook_mousemove(int x, int y, t_mlx *mlx);
+void        image_set_pixel(t_mlx *mlx, int x, int y, int color);
 t_fractal	*fractal_match(char *str);
 int			get_color(t_pixel p, t_mlx *mlx);
+t_palette	*get_palettes();
+void		zoom(int x, int y, t_viewport *v, double z);
 void		viewport_fit(t_viewport *v);
 void		reset_viewport(t_mlx *mlx);
-void    	move_element(int key, t_mlx *mlx);
+int    	move_element(int key, t_mlx *mlx);
 t_complex	screen_complex(int x, int y, t_viewport *v);
 t_pixel     julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
 void		julia_viewport(t_viewport *v);

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:05:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/09 17:06:33 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/10 12:19:56 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_color	linear_color(double i, int max, t_palette *p)
 	int		count;
 
 	if (p->cycle)
-		index = fmod(count, p->cycle - 1) / (p->cycle - 1);
+		index = fmod(i, p->cycle - 1) / (p->cycle - 1);
 	else
-		index = count / max;
+		index = i / max;
 	count = p->count - 1;
 	adj = fmod(index, 1.0f / count) * count;
 	return (clerp((t_color)(p->colors[(int)(index * count) + 1]),

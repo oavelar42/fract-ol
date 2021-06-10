@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 14:33:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/09 15:12:08 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/10 15:14:08 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		*render_thread(void *m)
 		while (x < WIN_WIDTH)
 		{
 			*(t->mlx->data + y * WIN_WIDTH + x) =
-				t->mlx->fractal->pixel(x, y, &t->mlx->viewport, t->mlx);
+				t->mlx->fractal->pixel(x, y, (&t->mlx->viewport), t->mlx);
 			x++;
 		}
 		y++;
@@ -74,5 +74,5 @@ void		draw(t_mlx *mlx)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image->image, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image, 0, 0);
 }
