@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 14:33:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 15:14:08 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 18:02:51 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		*render_thread(void *m)
+void	*render_thread(void *m)
 {
 	t_thread	*t;
 	int			x;
@@ -25,8 +25,9 @@ void		*render_thread(void *m)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			*(t->mlx->data + y * WIN_WIDTH + x) =
-				t->mlx->fractal->pixel(x, y, (&t->mlx->viewport), t->mlx);
+			*(t->mlx->data + y * WIN_WIDTH + x)
+				= t->mlx->fractal->pixel
+				(x, y, &t->mlx->viewport, t->mlx);
 			x++;
 		}
 		y++;
@@ -34,7 +35,7 @@ void		*render_thread(void *m)
 	return (NULL);
 }
 
-void		render(t_mlx *mlx)
+void	render(t_mlx *mlx)
 {
 	int			i;
 	t_render	*r;
@@ -57,10 +58,10 @@ void		render(t_mlx *mlx)
 	draw(mlx);
 }
 
-void		draw(t_mlx *mlx)
+void	draw(t_mlx *mlx)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < WIN_HEIGHT)
@@ -69,10 +70,10 @@ void		draw(t_mlx *mlx)
 		while (x < WIN_WIDTH)
 		{
 			image_set_pixel(mlx->image, x, y,
-					get_color(*(mlx->data + y * WIN_WIDTH + x), mlx));
+				get_color(*(mlx->data + y * WIN_WIDTH + x), mlx));
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image->image, 0, 0);
 }

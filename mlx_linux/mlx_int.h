@@ -136,5 +136,4 @@ int				mlx_int_str_str_cote(char *str,char *find,int len);
 int				mlx_int_str_str(char *str,char *find,int len);
 int				mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
 
-
 #endif

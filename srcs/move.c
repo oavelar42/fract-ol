@@ -6,18 +6,18 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 17:17:52 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 16:25:50 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 18:02:25 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		zoom(int x, int y, t_viewport *v, double z)
+void	zoom(int x, int y, t_viewport *v, double z)
 {
-	double w;
-	double h;
-	double nw;
-	double nh;
+	double	w;
+	double	h;
+	double	nw;
+	double	nh;
 
 	w = (v->xmax - v->xmin) * (v->zoom);
 	h = (v->ymax - v->ymin) * (v->zoom);
@@ -28,7 +28,7 @@ void		zoom(int x, int y, t_viewport *v, double z)
 	v->offy -= ((double)y / WIN_HEIGHT) * (nh - h);
 }
 
-int		draw_hooks(int key, t_mlx *mlx)
+int	draw_hooks(int key, t_mlx *mlx)
 {
 	int		doot;
 
@@ -44,8 +44,29 @@ int		draw_hooks(int key, t_mlx *mlx)
 	return (doot);
 }
 
-int		hook_keydown(int key, t_mlx *mlx)
+void	move(int key, t_mlx *mlx)
 {
+	double	w;
+	double	h;
+
+	w = (mlx->viewport.xmax - mlx->viewport.xmin) * mlx->viewport.zoom;
+	h = (mlx->viewport.ymax - mlx->viewport.ymin) * mlx->viewport.zoom;
+	if (key == UP)
+		mlx->viewport.offy -= h * 0.05f;
+	if (key == DOWN)
+		mlx->viewport.offy += h * 0.05f;
+	if (key == LEFT)
+		mlx->viewport.offx -= w * 0.05f;
+	if (key == RIGHT)
+		mlx->viewport.offx += w * 0.05f;
+	if (key == L)
+		mlx->mouselock = 1 - mlx->mouselock;
+}
+
+int	hook_keydown(int key, t_mlx *mlx)
+{
+	if (key == ESC)
+		exit(EXIT_SUCCESS);
 	if (key == NUM_0)
 		reset_viewport(mlx);
 	if (key == NUM_MULT)
@@ -57,28 +78,8 @@ int		hook_keydown(int key, t_mlx *mlx)
 		zoom(WIN_WIDTH / 2, WIN_HEIGHT / 2, &mlx->viewport, 1 / ZOOM);
 	if (key == NUM_MINUS)
 		zoom(WIN_WIDTH / 2, WIN_HEIGHT / 2, &mlx->viewport, ZOOM);
-	//move_element(key, mlx);
+	move(key, mlx);
 	if (draw_hooks(key, mlx))
 		render(mlx);
 	return (0);
-}
-
-int	move_element(int key, t_mlx *mlx)
-{
-	double  w;
-	double  h;
-
-	w = (mlx->viewport.xmax - mlx->viewport.xmin) * mlx->viewport.zoom;
-	h = (mlx->viewport.ymax - mlx->viewport.ymin) * mlx->viewport.zoom;
-	if (key == UP)
-		mlx->viewport.offy -= h * 0.05f;
-	if (key == DOWN)
-		mlx->viewport.offy += h * 0.05f;
-	if (key == LEFT)
-		mlx->viewport.offx -= w * 0.05f;
-	if (key == RIGHT)
-		mlx->viewport.offx += w *0.05f;
-	if (key == L)
-		mlx->mouselock = 1 - mlx->mouselock;
-	return (hook_keydown(key, mlx));
 }

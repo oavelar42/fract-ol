@@ -6,7 +6,7 @@
 #    By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 19:51:56 by oavelar           #+#    #+#              #
-#    Updated: 2021/06/10 18:31:02 by oavelar          ###   ########.fr        #
+#    Updated: 2021/06/11 23:05:22 by oavelar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ LIBFT_A		= libft/libft.a
 SRC_DIR		= srcs/
 
 SRC_FILES	= 	main.c \
+				init_mlx.c \
 				image.c \
 				render.c \
 				move.c \

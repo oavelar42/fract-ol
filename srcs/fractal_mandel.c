@@ -6,13 +6,13 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 10:35:49 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 15:25:25 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 22:52:24 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_pixel		mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx)
+t_pixel	mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx)
 {
 	t_complex	z;
 	t_complex	c;
@@ -39,7 +39,7 @@ t_pixel		mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx)
 	return ((t_pixel){.c = z, .i = i});
 }
 
-void		mandelbrot_viewport(t_viewport *v)
+void	mandelbrot_viewport(t_viewport *v)
 {
 	v->xmin = -2.0f;
 	v->xmax = 1.0f;

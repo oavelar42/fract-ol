@@ -6,75 +6,34 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 18:21:37 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 22:23:58 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	close_program(t_mlx *mlx)
+int	main(int argc, char **argv)
 {
-	mlx_destroy_window(mlx->mlx, mlx->window);
-	del_image(mlx->image);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-int	key_hook(int keycode, t_mlx *mlx)
-{
-	if (keycode == ESC)
-	{
-		printf("\n\nClosed with ESC\n");
-		close_program(mlx);
-	}
-	if (keycode == RIGHT || keycode == LEFT || keycode == UP || keycode == DOWN)
-		move_element(keycode, mlx);
-	return (0);
-}
-
-int	push_image(t_mlx *mlx)
-{
-	render(mlx);
-	mlx_clear_window(mlx->mlx, mlx->window);
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->image, 0, 0);
-	return (0);
-}
-
-void	init(t_mlx *mlx)
-{
-	t_fractal *f;
-
-	f = 0;
-	mlx->mlx = mlx_init();
-	mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "Fract'ol");
-	mlx->image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	mlx->img_add = mlx_get_data_addr(mlx->image, &mlx->bpp, &mlx->stride, &mlx->endian);
-	mlx_hook(mlx->window, CLOSE, 0L, close_program, mlx);
-	mlx_key_hook(mlx->window, key_hook, mlx);
-	mlx_expose_hook(mlx->window, push_image, mlx);
-	push_image(mlx);
-	mlx->mouse.isdown = 0;
-	mlx->fractal = f;
-	mlx->mouselock = 1 - f->mouse;
-	mlx->palette = get_palettes();
-	mlx->smooth = 1;
-	mlx_loop(mlx->mlx);
-}
-
-int	main(int ac, char **av)
-{
-	t_mlx		mlx;
+	t_mlx		*mlx;
 	t_fractal	*f;
 
-	
-	if (ac < 2)
-		return(printf("\nERROR : not enough arguments\n"));
-	f = fractal_match(av[1]);
+	if (argc < 2)
+		return (printf("ERROR: <fractol> <name>"));
+	f = fractal_match(argv[1]);
 	if (f->name == NULL)
-		return(printf("\nInvalid fractal name\n"));
-	init(&mlx);
-	reset_viewport(&mlx);
-	close_program(&mlx);
-	
+		return (printf("Are you sure that is the name of the fractol?"));
+	mlx = NULL;
+	if (mlx != NULL)
+		return (printf("ERROR: you have a problem somewhere !"));
+	else
+		mlx = init(f);
+	reset_viewport(mlx);
+	render(mlx);
+	mlx_key_hook(mlx->window, hook_keydown, mlx);
+	mlx_expose_hook(mlx->window, hook_expose, mlx);
+	mlx_hook(mlx->window, 4, 1L << 2, hook_mousedown, mlx);
+	mlx_hook(mlx->window, 5, 1L << 3, hook_mouseup, mlx);
+	mlx_hook(mlx->window, 6, 1L << 6, hook_mousemove, mlx);
+	mlx_loop(mlx->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 17:57:25 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 22:51:19 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@
 #  define NUM_MINUS 78
 #  define NUM_ENTER 76
 #  define L 37
+# endif
 
-#endif
-
-typedef struct		s_rgba
+typedef struct s_rgba
 {
 	uint8_t		b;
 	uint8_t		g;
@@ -72,13 +71,13 @@ typedef struct		s_rgba
 	uint8_t		a;
 }					t_rgba;
 
-typedef union		u_color
+typedef union u_color
 {
 	int			value;
 	t_rgba		rgba;
 }					t_color;
 
-typedef struct		s_mouse
+typedef struct s_mouse
 {
 	char		isdown;
 	int			x;
@@ -87,22 +86,22 @@ typedef struct		s_mouse
 	int			lasty;
 }					t_mouse;
 
-/*typedef struct		s_image
+typedef struct s_image
 {
 	void		*image;
 	char		*ptr;
 	int			bpp;
 	int			stride;
 	int			endian;
-}					t_image;*/
+}					t_image;
 
-typedef struct		s_complex
+typedef struct s_complex
 {
 	double		r;
 	double		i;
 }					t_complex;
 
-typedef struct		s_viewport
+typedef struct s_viewport
 {
 	double		xmin;
 	double		xmax;
@@ -115,13 +114,13 @@ typedef struct		s_viewport
 	t_complex	mouse;
 }					t_viewport;
 
-typedef struct		s_pixel
+typedef struct s_pixel
 {
 	t_complex	c;
 	long		i;
 }					t_pixel;
 
-typedef struct		s_palette
+typedef struct s_palette
 {
 	uint8_t		count;
 	int			cycle;
@@ -129,9 +128,10 @@ typedef struct		s_palette
 }					t_palette;
 typedef struct s_mlx	t_mlx;
 
-typedef void		(*t_f_fn_v)(t_viewport *v);
-typedef t_pixel		(*t_f_fn_p)(int x, int y, t_viewport *v, t_mlx *mlx);
-typedef struct		s_fractal
+typedef void	(*t_f_fn_v)(t_viewport *v);
+typedef t_pixel	(*t_f_fn_p)(int x, int y, t_viewport *v, t_mlx *mlx);
+
+typedef struct s_fractal
 {
 	char		*name;
 	t_f_fn_v	viewport;
@@ -139,62 +139,60 @@ typedef struct		s_fractal
 	int			mouse;
 }					t_fractal;
 
-typedef struct		s_thread
+typedef struct s_thread
 {
 	int				id;
 	t_mlx			*mlx;
 }					t_thread;
 
-typedef struct		s_render
+typedef struct s_render
 {
 	pthread_t		threads[THREADS];
 	t_thread		args[THREADS];
 }					t_render;
 
-typedef struct s_mlx
+struct	s_mlx
 {
-    void        *mlx;
-    void        *window;
-	char    	*img_add;
-	t_fractal   *fractal;
-    t_pixel     *data;
-    t_viewport  viewport;
+	void		*mlx;
+	void		*window;
+	t_fractal	*fractal;
+	t_pixel		*data;
+	t_image		*image;
 	t_mouse		mouse;
-    //t_image     *image;
-	t_render    render;
+	t_viewport	viewport;
 	t_palette	*palette;
+	t_render	render;
 	int			smooth;
 	int			mouselock;
-	void    *image;
-	char	*ptr;
-    int     bpp;
-    int     stride;
-    int     endian;
-}               t_mlx;
+};
 
-void        init(t_mlx *mlx);
-void 	    render(t_mlx *mlx);
-void	    draw(t_mlx *mlx);
-t_mlx     *del_image(t_mlx *mlx);
-void    	mouse(t_mlx *mlx);
-int			hook_keydown(int key, t_mlx *mlx);
-int			hook_mousedown(int button, int x, int y, t_mlx *mlx);
-int			hook_mouseup(int button, int x, int y, t_mlx *mlx);
-int			hook_mousemove(int x, int y, t_mlx *mlx);
-void        image_set_pixel(t_mlx *mlx, int x, int y, int color);
-t_fractal	*fractal_match(char *str);
-int			get_color(t_pixel p, t_mlx *mlx);
-t_palette	*get_palettes();
-void		zoom(int x, int y, t_viewport *v, double z);
-void		viewport_fit(t_viewport *v);
-void		reset_viewport(t_mlx *mlx);
-int    	move_element(int key, t_mlx *mlx);
-t_complex	screen_complex(int x, int y, t_viewport *v);
-t_pixel     julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void		julia_viewport(t_viewport *v);
-t_pixel 	mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void    	mandelbrot_viewport(t_viewport *v);
-t_pixel		burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void		burningship_viewport(t_viewport *v);
+t_mlx				*mlxdel(t_mlx *mlx);
+t_mlx				*init(t_fractal *f);
+void				render(t_mlx *mlx);
+void				draw(t_mlx *mlx);
+int					hook_mousedown(int button, int x, int y, t_mlx *mlx);
+int					hook_mouseup(int button, int x, int y, t_mlx *mlx);
+int					hook_mousemove(int x, int y, t_mlx *mlx);
+int					hook_keydown(int key, t_mlx *mlx);
+int					hook_expose(t_mlx *mlx);
+t_image				*del_image(t_mlx *mlx, t_image *img);
+t_image				*new_image(t_mlx *mlx);
+void				clear_image(t_image *img);
+void				image_set_pixel(t_image *image, int x, int y, int color);
+t_fractal			*fractal_match(char *str);
+int					get_color(t_pixel p, t_mlx *mlx);
+t_palette			*get_palettes(void);
+void				zoom(int x, int y, t_viewport *v, double z);
+void				viewport_fit(t_viewport *v);
+void				reset_viewport(t_mlx *mlx);
+t_complex			screen_complex(int x, int y, t_viewport *v);
+t_pixel				mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				mandelbrot_viewport(t_viewport *v);
+t_pixel				burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				burningship_viewport(t_viewport *v);
+t_pixel				julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				julia_viewport(t_viewport *v);
+void				*ft_memalloc(size_t size);
+void				ft_memdel(void **ap);
 
 #endif

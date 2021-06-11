@@ -6,26 +6,31 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 14:09:53 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/10 14:45:29 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 22:26:47 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	image_set_pixel(t_mlx *mlx, int x, int y, int color)
+void	image_set_pixel(t_image *image, int x, int y, int color)
 {
-	if (x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_WIDTH)
+	if (x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return ;
-	*(int *)(mlx->ptr + ((x + y * WIN_WIDTH) * mlx->bpp)) = color;
+	*(int *)(image->ptr + ((x + y * WIN_WIDTH) * image->bpp)) = color;
 }
 
-t_mlx *del_image(t_mlx *mlx)
+void	clear_image(t_image *image)
 {
-	if (mlx->image != NULL)
+	ft_bzero(image->ptr, WIN_WIDTH * WIN_HEIGHT * image->bpp);
+}
+
+t_image	*del_image(t_mlx *mlx, t_image *img)
+{
+	if (img != NULL)
 	{
-		if (mlx->image != NULL)
-			mlx_destroy_image(mlx->mlx, mlx->image);
-		free(mlx->image);
+		if (img->image != NULL)
+			mlx_destroy_image(mlx->mlx, img->image);
+		ft_memdel((void **)&img);
 	}
 	return (NULL);
 }

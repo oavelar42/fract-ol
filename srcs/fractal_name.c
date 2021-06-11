@@ -6,15 +6,15 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 22:31:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/09 11:03:48 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/11 18:01:37 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal	*get_fractal(void)
+t_fractal	*get_fractals(void)
 {
-	static t_fractal array[8] = {
+	static t_fractal	array[8] = {
 		{"mandelbrot", mandelbrot_viewport, mandelbrot_pixel, 0},
 		{"julia", julia_viewport, julia_pixel, 1},
 		{"burningship", burningship_viewport, burningship_pixel, 0},
@@ -29,7 +29,7 @@ t_fractal	*fractal_match(char *str)
 	t_fractal	*f;
 	int			i;
 
-	f = get_fractal();
+	f = get_fractals();
 	i = 0;
 	while (f[i].name != NULL)
 	{
@@ -38,4 +38,21 @@ t_fractal	*fractal_match(char *str)
 		i++;
 	}
 	return (&f[i]);
+}
+
+void	ft_memdel(void **ap)
+{
+	free(*ap);
+	*ap = (NULL);
+}
+
+void	*ft_memalloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+		return (NULL);
+	ft_bzero(ptr, size);
+	return (ptr);
 }
