@@ -6,15 +6,15 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 22:51:19 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/12 11:45:11 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 960
+# define WIN_WIDTH 1560
+# define WIN_HEIGHT 1160
 # define ZOOM 1.1f
 # define THREADS 8
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_mlx_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:02:04 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 23:04:47 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/12 12:44:49 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,21 @@ t_image	*new_image(t_mlx *mlx)
 			&img->endian);
 	img->bpp /= 8;
 	return (img);
+}
+
+t_palette	*get_palettes(void)
+{
+	static t_palette	array[5];
+
+	array[0]
+		= (t_palette){5, 0, {0x4B4FC5, 0xB30032, 0xFFB733, 0xF57336, 0xC22121}};
+	array[1]
+		= (t_palette){5, 0, {0x0D1C33, 0x3DC51B, 0x2B6832, 0x4F9300, 0xA1D700}};
+	array[2]
+		= (t_palette){5, 0, {0x002F2F, 0xFFF64D, 0xEFECCA, 0xA7A37E, 0xE6E2AF}};
+	array[3]
+		= (t_palette){7, 10, {0xFF0000, 0xFFFF00, 0x00FF00, 0x00FFFF,
+		0x0000FF, 0xFF00FF, 0xFF0000}};
+	array[4] = (t_palette){0, 0, {0}};
+	return (array);
 }
