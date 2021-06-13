@@ -16,3 +16,11 @@ $ make
 Executing the program :
 
 ./fractol 'name-fractal'
+
+<h2>Just simple example Fractol</h2>
+
+<h3>Mandelbrot</h3>
+<p align="center">
+  <img width="680" height="530" src="/img/mandelbrot.bmp" alt="mandelbort"/>
+</p>
+
