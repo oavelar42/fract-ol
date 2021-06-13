@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 17:17:52 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 18:02:25 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 14:20:02 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	draw_hooks(int key, t_mlx *mlx)
 
 	doot = 0;
 	if (key >= DIGIT_1 && key <= DIGIT_1 + 3)
-		mlx->palette = &get_palettes()[key - DIGIT_1];
+		mlx->palette = &array_colors()[key - DIGIT_1];
 	else if (key == NUM_ENTER)
 		mlx->smooth = 1 - mlx->smooth;
 	else

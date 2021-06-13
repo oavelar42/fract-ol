@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 22:31:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 18:01:37 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 14:12:20 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 t_fractal	*get_fractals(void)
 {
 	static t_fractal	array[8] = {
-		{"mandelbrot", mandelbrot_viewport, mandelbrot_pixel, 0},
-		{"julia", julia_viewport, julia_pixel, 1},
-		{"burningship", burningship_viewport, burningship_pixel, 0},
+		{"mandelbrot", mandelbrot, mandelbrot_pixel, 0},
+		{"julia", julia, julia_pixel, 1},
+		{"burningship", burningship, burningship_pixel, 0},
 		{NULL, NULL, NULL, 0}
 	};
 
@@ -40,7 +40,7 @@ t_fractal	*fractal_match(char *str)
 	return (&f[i]);
 }
 
-void	ft_memdel(void **ap)
+void	ft_free(void **ap)
 {
 	free(*ap);
 	*ap = (NULL);

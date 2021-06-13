@@ -6,16 +6,16 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 19:01:36 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/12 11:45:11 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 15:20:21 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIN_WIDTH 1560
-# define WIN_HEIGHT 1160
-# define ZOOM 1.1f
+# define WIN_WIDTH 1260
+# define WIN_HEIGHT 960
+# define ZOOM 1.0f
 # define THREADS 8
 
 # include "mlx.h"
@@ -175,24 +175,24 @@ int					hook_mouseup(int button, int x, int y, t_mlx *mlx);
 int					hook_mousemove(int x, int y, t_mlx *mlx);
 int					hook_keydown(int key, t_mlx *mlx);
 int					hook_expose(t_mlx *mlx);
-t_image				*del_image(t_mlx *mlx, t_image *img);
+t_image				*close_image(t_mlx *mlx, t_image *img);
 t_image				*new_image(t_mlx *mlx);
 void				clear_image(t_image *img);
 void				image_set_pixel(t_image *image, int x, int y, int color);
 t_fractal			*fractal_match(char *str);
 int					get_color(t_pixel p, t_mlx *mlx);
-t_palette			*get_palettes(void);
+t_palette			*array_colors(void);
 void				zoom(int x, int y, t_viewport *v, double z);
 void				viewport_fit(t_viewport *v);
 void				reset_viewport(t_mlx *mlx);
 t_complex			screen_complex(int x, int y, t_viewport *v);
 t_pixel				mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void				mandelbrot_viewport(t_viewport *v);
+void				mandelbrot(t_viewport *v);
 t_pixel				burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void				burningship_viewport(t_viewport *v);
+void				burningship(t_viewport *v);
 t_pixel				julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
-void				julia_viewport(t_viewport *v);
+void				julia(t_viewport *v);
 void				*ft_memalloc(size_t size);
-void				ft_memdel(void **ap);
+void				ft_free(void **ap);
 
 #endif

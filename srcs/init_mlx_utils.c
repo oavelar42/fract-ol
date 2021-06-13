@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:02:04 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/12 12:44:49 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 14:20:44 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_mlx	*mlxdel(t_mlx *mlx)
 	if (mlx->window != NULL)
 		mlx_destroy_window(mlx->mlx, mlx->window);
 	if (mlx->image != NULL)
-		del_image(mlx, mlx->image);
-	ft_memdel((void **)&mlx);
+		close_image(mlx, mlx->image);
+	ft_free((void **)&mlx);
 	return (NULL);
 }
 
@@ -46,7 +46,7 @@ t_mlx	*init(t_fractal *f)
 	mlx->mouse.isdown = 0;
 	mlx->fractal = f;
 	mlx->mouselock = 1 - f->mouse;
-	mlx->palette = get_palettes();
+	mlx->palette = array_colors();
 	mlx->smooth = 1;
 	return (mlx);
 }
@@ -58,14 +58,14 @@ t_image	*new_image(t_mlx *mlx)
   	if ((img = ft_memalloc(sizeof(t_image))) == NULL)
 		return (NULL);
 	if ((img->image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT)) == NULL)
-		return (del_image(mlx, img));
+		return (close_image(mlx, img));
 	img->ptr = mlx_get_data_addr(img->image, &img->bpp, &img->stride,
 			&img->endian);
 	img->bpp /= 8;
 	return (img);
 }
 
-t_palette	*get_palettes(void)
+t_palette	*array_colors(void)
 {
 	static t_palette	array[5];
 

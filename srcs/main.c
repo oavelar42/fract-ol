@@ -6,7 +6,7 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 16:51:43 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 22:23:58 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 15:15:18 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_fractal	*f;
 
 	if (argc < 2)
-		return (printf("ERROR: <fractol> <name>"));
+		return (printf("ERROR: ./<fractol> <name>"));
 	f = fractal_match(argv[1]);
 	if (f->name == NULL)
 		return (printf("Are you sure that is the name of the fractol?"));

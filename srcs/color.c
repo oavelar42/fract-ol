@@ -6,28 +6,28 @@
 /*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:05:46 by oavelar           #+#    #+#             */
-/*   Updated: 2021/06/11 18:00:55 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/13 14:17:04 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_lerpi(int first, int second, double p)
+int	ft_count(int first, int second, double p)
 {
 	if (first == second)
 		return (first);
 	return ((int)((double)first + (second - first) * p));
 }
 
-t_color	clerp(t_color c1, t_color c2, double p)
+t_color	ft_rgb(t_color c1, t_color c2, double p)
 {
 	t_color	c;
 
 	if (c1.value == c2.value)
 		return (c1);
-	c.rgba.r = (char)ft_lerpi((int)c1.rgba.r, (int)c2.rgba.r, p);
-	c.rgba.g = (char)ft_lerpi((int)c1.rgba.g, (int)c2.rgba.g, p);
-	c.rgba.b = (char)ft_lerpi((int)c1.rgba.b, (int)c2.rgba.b, p);
+	c.rgba.r = (char)ft_count((int)c1.rgba.r, (int)c2.rgba.r, p);
+	c.rgba.g = (char)ft_count((int)c1.rgba.g, (int)c2.rgba.g, p);
+	c.rgba.b = (char)ft_count((int)c1.rgba.b, (int)c2.rgba.b, p);
 	c.rgba.a = (char)0x00;
 	return (c);
 }
@@ -44,7 +44,7 @@ t_color	linear_color(double i, int max, t_palette *p)
 		index = i / max;
 	c = p->count - 1;
 	adjust = fmod(index, 1.0f / c) * c;
-	return (clerp((t_color)(p->colors[(int)(index * c) + 1]),
+	return (ft_rgb((t_color)(p->colors[(int)(index * c) + 1]),
 		(t_color)(p->colors[(int)(index * c)]),
 		(int)(adjust + 1) - adjust));
 }
