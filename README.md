@@ -21,6 +21,6 @@ Executing the program :
 
 <h3>Mandelbrot</h3>
 <p align="center">
-  <img width="680" height="530" src="img/mandelbrot.bmp" alt="mandelbort"/>
+  <img width="680" height="530" src="/img/mandelbrot.png" alt="mandelbrot"/>
 </p>
 
