@@ -1,7 +1,8 @@
 <h1> Fract-ol </h1>
 
 <h3>Fractal geometry is the branch of mathematics that studies the properties and behavior of fractals.</h3>
-- It describes many situations that cannot be easily explained by classical geometry, and has been applied in science,
+
+-  It describes many situations that cannot be easily explained by classical geometry, and has been applied in science,
 technology and computer-generated art.
 
 - A fractal is a geometric object that can be divided into parts, each of which is similar to the original object.
