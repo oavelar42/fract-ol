@@ -11,11 +11,11 @@ typically a recursive or iterative process.</h4>
 
 <h4>This project done for MAC's and Linux ...
 
-#Compiling the program :
+Compiling the program :
 
 `$ make`
 
-#Executing the program :
+Executing the program :
 
 `./fractol 'name-fractal'`
 
