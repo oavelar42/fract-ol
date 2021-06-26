@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oavelar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 12:01:15 by oavelar           #+#    #+#             */
-/*   Updated: 2021/04/10 13:12:19 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/26 10:27:58 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ double	ft_atod(const char *str)
 
 	num = 0;
 	sign = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' ||
-	*str == '\r' || *str == '\v' || *str == '\f')
+	while (*str == ' ' || *str == '\t' || *str == '\n'
+		|| *str == '\r' || *str == '\v' || *str == '\f')
 		str++;
 	if (*str == '-' || *str == '+')
 	{

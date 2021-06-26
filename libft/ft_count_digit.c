@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_count_digit(int num)
+int	ft_count_digit(int num)
 {
-	int count;
+	int	count;
 
 	count = 1;
 	while (num >= 10)

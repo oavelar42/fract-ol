@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oavelar <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: oavelar <oavelar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:30:45 by oavelar           #+#    #+#             */
-/*   Updated: 2021/04/10 15:16:35 by oavelar          ###   ########.fr       */
+/*   Updated: 2021/06/26 10:26:03 by oavelar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	if (!next[fd])
 		next[fd] = ft_strndup("", 1);
-	while (!(aux_ptr = ft_strchr(next[fd], '\n'))
-			&& ((b = read(fd, ptr, BUFFER_SIZE)) > 0))
+	aux_ptr = NULL;
+	b = 1;
+	while (!aux_ptr && (b > 0))
 	{
+		b = read(fd, ptr, BUFFER_SIZE);
 		ptr[b] = 0;
 		if (next[fd])
 			aux_ptr = ft_strjoin(next[fd], ptr);
@@ -54,6 +56,7 @@ int	get_next_line(int fd, char **line)
 		if (next[fd])
 			free(next[fd]);
 		next[fd] = aux_ptr;
+		aux_ptr = ft_strchr(next[fd], '\n');
 	}
 	return (ft_ret(line, &next[fd], aux_ptr));
 }

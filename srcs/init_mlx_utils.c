@@ -55,7 +55,7 @@ t_image	*new_image(t_mlx *mlx)
 {
 	t_image		*img;
 
-  	if ((img = ft_memalloc(sizeof(t_image))) == NULL)
+	if ((img = ft_memalloc(sizeof(t_image))) == NULL)
 		return (NULL);
 	if ((img->image = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT)) == NULL)
 		return (close_image(mlx, img));
